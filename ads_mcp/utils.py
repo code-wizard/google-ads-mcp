@@ -75,16 +75,13 @@ def _get_googleads_client() -> GoogleAdsClient:
     # Use this line if you have a google-ads.yaml file
     # client = GoogleAdsClient.load_from_storage()
     config = dict(
-        credentials=_create_credentials(),
         developer_token=_get_developer_token(),
         login_customer_id=_get_login_customer_id(),
         refresh_token=_get_refresh_token(),
         client_id=_get_client_id(),
         client_secret=_get_cliet_secret(),
     )
-    client = GoogleAdsClient(
-        
-    )
+    client = GoogleAdsClient.load_from_dict(config)
 
     return client
 
