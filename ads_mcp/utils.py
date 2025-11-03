@@ -30,6 +30,9 @@ from ads_mcp.mcp_header_interceptor import MCPHeaderInterceptor
 import os
 import importlib.resources
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # filename for generated field information used by search
 _GAQL_FILENAME = "gaql_resources.json"
 
@@ -74,13 +77,28 @@ def _get_cliet_secret() -> str:
 def _get_googleads_client() -> GoogleAdsClient:
     # Use this line if you have a google-ads.yaml file
     # client = GoogleAdsClient.load_from_storage()
+    # config = {
+    #         "developer_token": settings.Google.DEVELOPER_TOKEN,
+    #         "client_id": settings.Google.CLIENT_ID,
+    #         "client_secret": settings.Google.CLIENT_SECRET,
+    #         "refresh_token": self.refresh_token,
+    #         "use_proto_plus": "true"
+    #     }
+
+    #     if login_customer_id:
+    #         config['login_customer_id'] = login_customer_id
+
+    #     return GoogleAdsClient.load_from_dict(config, version=self.version)
+
     config = dict(
         developer_token=_get_developer_token(),
         login_customer_id=_get_login_customer_id(),
         refresh_token=_get_refresh_token(),
         client_id=_get_client_id(),
         client_secret=_get_cliet_secret(),
+        use_proto_plus=True
     )
+    print("Google Ads Client Config:", config)
     client = GoogleAdsClient.load_from_dict(config)
 
     return client

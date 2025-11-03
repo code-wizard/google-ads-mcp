@@ -16,6 +16,7 @@
 
 from ads_mcp.coordinator import mcp
 
+
 # The following imports are necessary to register the tools with the `mcp`
 # object, even though they are not directly used in this file.
 # The `# noqa: F401` comment tells the linter to ignore the "unused import"
